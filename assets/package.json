@@ -1,0 +1,59 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "keywords": [
+    "codex editor",
+    "editor.js",
+    "editorjs"
+  ],
+  "description": "Editor.js for yii2",
+  "license": "MIT",
+  "repository": "",
+  "main": "./dist/js/bundle.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "build:dev": "webpack --mode development --watch"
+  },
+  "author": {
+    "name": "Quanzo",
+    "email": "iquanzo@gmail.com"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@editorjs/checklist": ">=1.0.0",
+    "@editorjs/code": ">=1.0.0",
+    "@editorjs/delimiter": ">=1.0.0",
+    "@editorjs/editorjs": ">=2.0.0",
+    "@editorjs/embed": ">=1.0.0",
+    "@editorjs/header": ">=1.0.0",
+    "@editorjs/image": ">=1.0.0",
+    "@editorjs/inline-code": ">=1.0.0",
+    "@editorjs/link": ">=1.0.0",
+    "@editorjs/list": ">=1.0.0",
+    "@editorjs/marker": ">=1.0.0",
+    "@editorjs/paragraph": ">=1.0.0",
+    "@editorjs/quote": ">=1.0.0",
+    "@editorjs/raw": ">=1.0.0",
+    "@editorjs/table": ">=1.2.0",
+    "@editorjs/warning": ">=1.0.0",
+    "@quanzo/change-font-size": ">=1.0.0",
+    "@quanzo/metaparam": ">=1.0.0",
+    "@quanzo/personality": ">=1.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^1.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^0.21.0",
+    "terser-webpack-plugin": "^1.4.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "extract-text-webpack-plugin": "^3.0.2"
+  }
+}

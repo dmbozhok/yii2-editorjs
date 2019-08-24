@@ -1,5 +1,24 @@
-class Ejs {
+const EditorJS = require('@editorjs/editorjs');
+const Table = require('@editorjs/table');
+const Header = require('@editorjs/header');
+const List = require('@editorjs/list');
+const Paragraph = require('@editorjs/paragraph');
+const Warning = require('@editorjs/warning');
+const CodeTool = require('@editorjs/code');
+const Delimiter = require('@editorjs/delimiter');
+const InlineCode = require('@editorjs/inline-code');
+const Quote = require('@editorjs/quote');
+const Marker = require('@editorjs/marker');
+const RawTool = require('@editorjs/raw');
+const Embed = require('@editorjs/embed');
+const Checklist = require('@editorjs/checklist');
+const Metaparam = require('@quanzo/metaparam');
+const ChangeFontSize = require('@quanzo/change-font-size');
+const Personality = require('@quanzo/personality');
+const ImageTool = require('@editorjs/image');
+const LinkTool = require('@editorjs/link');
 
+class Ejs {
 	constructor(id, uploadFile, uploadUrl, uploadLink, form, name, content) {
 		this.uploadFile = uploadFile;
 		this.uploadLink = uploadLink;
@@ -55,8 +74,8 @@ class Ejs {
 				class: Table,
 				inlineToolbar: true,
 				config: {
-					rows: 2,
-					cols: 3,
+					/*rows: 1,
+					cols: 1,*/
 				}
 			},
 			inlineCode: {
@@ -99,6 +118,37 @@ class Ejs {
 						}
 					}
 				}
+			},
+			checklist: {
+				class: Checklist,
+				inlineToolbar: true,
+			},
+			metaparam: {
+				class: Metaparam
+			},
+			minus10percent: {
+				class: ChangeFontSize,
+				config: {
+					cssClass: "minus10pc",
+					buttonText: "-10%",
+				}
+			},
+			plus10percent: {
+				class: ChangeFontSize,
+			},
+			plus20percent: {
+				class: ChangeFontSize,
+				config: {
+					cssClass: "plus20pc",
+					buttonText: "20%"
+				}
+			},
+			plus30percent: {
+				class: ChangeFontSize,
+				config: {
+					cssClass: "plus30pc",
+					buttonText: "30%"
+				}
 			}
 		};
 		if (this.uploadFile || this.uploadUrl) {
@@ -111,10 +161,19 @@ class Ejs {
 					types: "*/*",
 					captionPlaceholder: "Enter caption",
 				}
-			};
+			};			
 		}
 		if (this.uploadFile) {
 			ejs_tools["image"].config.endpoints["byFile"] = this.uploadFile;
+			ejs_tools["personality"] = {
+				class: Personality,
+				config: {
+					endpoint: this.uploadFile,
+					additionalRequestData: this.addRequestData,
+					field: "image",
+					types: "*/*",
+				}
+			};
 		}
 		if (this.uploadUrl) {
 			ejs_tools["image"].config.endpoints["byUrl"] = this.uploadUrl;
@@ -199,5 +258,5 @@ class Ejs {
 			}
 		}
 	} // end loadJson
-} // end class
-
+}; // end class
+module.exports = Ejs;

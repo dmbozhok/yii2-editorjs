@@ -2,6 +2,7 @@
 namespace x51\yii2\modules\editorjs\classes;
 
 use \yii\helpers\Json;
+use \Yii;
 
 class Render
 {
@@ -51,16 +52,12 @@ class Render
         return '<h' . $level . '>' . $data['text'] . '</h' . $level . '>';
     }
 
-    public function block_warning(array $data)
-    {
-        // $block['data']['title'] $block['data']['message']
-        return '';
-    }
+    
     public function block_list(array $data)
     {
-        $listStyle = $block['data']['style'] == 'ordered' ? 'ol' : 'ul';
+        $listStyle = $data['style'] == 'ordered' ? 'ol' : 'ul';
         $result = '<' . $listStyle . '>';
-        foreach ($data['style'] as $item) {
+        foreach ($data['items'] as $item) {
             $result .= '<li>' . $item . '</li>';
         }
         return $result . '</' . $listStyle . '>';
@@ -79,7 +76,7 @@ class Render
     }
     public function block_image(array $data)
     {
-        $class = '';
+        $class = 'image';
         if (!empty($data['stretched']) && empty($data['withBackground'])) {
             $class .= ' stretched';
         }
@@ -130,7 +127,7 @@ class Render
     }
     public function block_delimiter(array $data)
     {
-        return '<hr>';
+        return '<div class="delimiter"></div>';
     }
     public function block_table(array $data)
     {
@@ -155,7 +152,69 @@ class Render
     }
     public function block_raw(array $data)
     {
-        $result .= $data['html'];
+        $result = $data['html'];
+		return $result;
     }
+	public function block_warning(array $data) {
+		$result = '<div class="alert alert-warning">';
+			if ($data['title']) {
+				$result.='<div class="title">'.$data['title'].'</div>';
+			}
+			$result.='<div class="message">'.$data['message'].'</div>';
+		$result.='</div>';
+		return $result;
+	}
+	public function block_checklist(array $data) {
+		$result = '<ul class="checklist">';
+		foreach ($data['items'] as $item) {
+			$result.='<li class="'.($item['checked'] ? 'checked' : 'unchecked').'">'.$item['text'].'</li>';
+		}
+		return $result.'</ul>';
+    }
+    public function block_personality(array $data) {
+        $result = '<div class="personality">';
+        $name = '';
+        $nameHtml = '';
+        if (!empty($data['name'])) {
+            $name = $data['name'];
+            $nameHtml = htmlentities($data['name'], ENT_HTML5 | ENT_QUOTES);
+        }        
+        $result .= '<div class="info">';
+        if ($name) {
+            $result.='<div class="person_name">' . $name . '</div>';
+        }
 
+        if (!empty($data['description'])) {
+            $result.='<div class="person_desc">' . $data['description'] . '</div>';
+        }
+        if (!empty($data['link'])) {
+            //$_SERVER['REQUEST_SCHEME']
+            $result.='<div class="person_link"><a href="'.htmlentities($data['link'], ENT_HTML5 | ENT_QUOTES).'" title="'.$nameHtml.'">'.$data['link'].'</a></div>';
+        }
+        $result.='</div>';
+        if (!empty($data['photo'])) {
+            $result .= '<img src="' . $data['photo'] . '" title="' . $nameHtml . '">';
+        }
+
+        return $result . '</div>';
+    }
+    
+    public function block_metaparam(array $data) {
+        $view = Yii::$app->view;
+        if (!empty($data['title'])) {
+            $view->title = $data['title'];
+        }
+        if (!empty($data['description'])) {
+            $view->registerMetaTag([
+                'name' => 'description',
+                'content' => addslashes(strip_tags($data['description']))
+            ]);            
+        }
+        if (!empty($data['keywords'])) {
+            $view->registerMetaTag([
+                'name' => 'keywords',
+                'content' => addslashes(strip_tags($data['keywords'])),
+            ]);
+        }
+    }
 } // class

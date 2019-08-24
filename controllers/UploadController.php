@@ -23,6 +23,15 @@ class UploadController extends Controller
                     'application/json' => \yii\web\Response::FORMAT_JSON,
                 ],
             ],
+            'access' => [
+                'class' => '\yii\filters\AccessControl',
+                'rules' => [                    
+                    [
+                        'allow' => true,
+                        'roles' => ['admin', 'static_page_manager']
+                    ]
+                ]
+            ],
             /*'verbs' => [
         'class' => VerbFilter::className(),
         'actions' => [
@@ -35,11 +44,11 @@ class UploadController extends Controller
 
     public function beforeAction($action)
     {
-        if ($action->id == 'url') {
+        if ($action->id == 'url') { // только для actionUrl
             //$this->enableCsrfValidation = false;
             $request = Yii::$app->request;
             if (strpos($request->contentType, 'application/json') !== false) {
-                if ($arParams = json_decode($request->rawBody, true)) {
+                if ($arParams = json_decode($request->rawBody, true)) { // получен запрос в виде json - занесем данные как будто это post запрос
                     foreach ($arParams as $n => $v) {
                         if (!isset($_POST[$n])) {
                             $_POST[$n] = $v;
@@ -297,6 +306,11 @@ class UploadController extends Controller
         return null;
     } // end loadImageFromUrl
 
+    /**
+     * Возвращает контекст для запроса
+     *
+     * @return context
+     */
     protected function getContext()
     {
         return stream_context_create([
@@ -307,7 +321,7 @@ class UploadController extends Controller
     }
 
     /**
-     * Выполняет операцию над загруженным файлом по настройкам модуля
+     * Выполняет операцию над загруженным файлом (картинкой) по настройкам модуля
      *
      * @param UploadedFile $file
      * @return void
@@ -426,9 +440,13 @@ class UploadController extends Controller
 
         }
         return $res;
-
     } // end processUploadFile
 
+    /**
+     * По настройкам формирует относительное имя директории для сохранения.
+     *
+     * @return string
+     */
     protected function getUploadSubdir()
     {
         $uploadDirUpd = '';
@@ -447,6 +465,11 @@ class UploadController extends Controller
         return $uploadDirUpd;
     }
 
+    /**
+     * Возвращает абсолютный путь к директории для сохранения
+     *
+     * @return string
+     */
     protected function getUploadDir()
     {
         if ($this->module->absUploadDir) {
@@ -456,6 +479,13 @@ class UploadController extends Controller
         }
     } // end getUploadDir
 
+    /**
+     * Переносит содержимое временного файла. Временный файл удаляется.
+     *
+     * @param string $tempFile
+     * @param string $destFile
+     * @return boolean
+     */
     protected function moveTempFile($tempFile, $destFile)
     {
         $result = false;
