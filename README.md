@@ -86,3 +86,19 @@ static page.
         ];
     }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Editor.js in form
+-----------------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$form = ActiveForm::begin();
+echo $form->field($model, 'post_type')->textInput(['maxlength' => true]);
+.....
+Yii::$app->getModule('editorjs')->editorjs('editorjs-container', $model->formName(), 'textNameFieldInModel', $model->textNameFieldInModel);
+.....
+ActiveForm::end();
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Can be used for any form. The result is in a hidden field. Field name
+`formName[textNameFieldInModel]`. If you do not specify a form name, then the
+result in field `textNameFieldInModel`.
