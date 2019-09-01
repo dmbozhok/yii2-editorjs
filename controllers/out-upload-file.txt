@@ -1,8 +1,0 @@
-yii\web\UploadedFile Object
-(
-    [name] => aloe.jpg
-    [tempName] => /tmp/phpOYhXiq
-    [type] => image/jpeg
-    [size] => 133421
-    [error] => 0
-)

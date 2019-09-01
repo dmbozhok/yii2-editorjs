@@ -88,7 +88,7 @@ echo '<pre>';
 
         if ($pagesDir = $this->getStaticPageDir()) {
 
-            $model = new \x51\yii2\modules\editorjs\models\StaticPage($pagesDir, $this->module->extWithDot, '');
+            $model = new StaticPage($pagesDir, $this->module->extWithDot, '');
             $params = [
                 'model' => $model,
             ];
@@ -119,7 +119,7 @@ echo '<pre>';
     {
         if ($pagesDir = $this->getStaticPageDir()) {
 
-            $model = new \x51\yii2\modules\editorjs\models\StaticPage($pagesDir, $this->module->extWithDot, $id);
+            $model = new StaticPage($pagesDir, $this->module->extWithDot, $id);
             $params = [
                 'id' => $id,
                 'model' => $model,
@@ -146,7 +146,7 @@ echo '<pre>';
 
     public function actionView($id) {
         if ($pagesDir = $this->getStaticPageDir()) {
-            $model = new \x51\yii2\modules\editorjs\models\StaticPage($pagesDir, $this->module->extWithDot, $id);
+            $model = new StaticPage($pagesDir, $this->module->extWithDot, $id);
             $params = [
                 'model' => $model
             ];
@@ -156,7 +156,7 @@ echo '<pre>';
 
     public function actionDelete($id) {
         if ($pagesDir = $this->getStaticPageDir()) {
-            $model = new \x51\yii2\modules\editorjs\models\StaticPage($pagesDir, $this->module->extWithDot, $id);
+            $model = new StaticPage($pagesDir, $this->module->extWithDot, $id);
             $model->delete();
             Yii::$app->response->redirect(['/'.$this->module->id.'/'.$this->id.'/index']);
         }
