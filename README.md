@@ -1,7 +1,7 @@
 editorjs - module for Yii 2
 ===========================
 
-Use the https://editorjs.io/ in forms from Yii2.
+Use the [https://editorjs.io/](https://editorjs.io/) in forms from Yii2.
 
 Install
 -------

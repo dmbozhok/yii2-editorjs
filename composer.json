@@ -1,6 +1,6 @@
 {
     "name": "quanzo/yii2-editorjs",
-    "description": "Use editor.js Module in Yii2",
+    "description": "Use editor.js in form. Module for Yii2",
 	"version": "1.0.0",
     "authors": [
         {
