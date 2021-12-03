@@ -37,6 +37,7 @@ class Ejs {
 
 	get tools() {
 		let ejs_tools = {
+			/*
 			header: {
 				class: Header,
 				shortcut: "CMD+SHIFT+H",
@@ -44,6 +45,7 @@ class Ejs {
 					placeholder: "Enter a header"
 				}
 			},
+			*/
 			list: {
 				class: List,
 				inlineToolbar: true,
@@ -52,6 +54,7 @@ class Ejs {
 				class: Paragraph,
 				inlineToolbar: true,
 			},
+			/*
 			warning: {
 				class: Warning,
 				inlineToolbar: true,
@@ -149,8 +152,9 @@ class Ejs {
 					cssClass: "plus30pc",
 					buttonText: "30%"
 				}
-			}
+			}*/
 		};
+		/*
 		if (this.uploadFile || this.uploadUrl) {
 			ejs_tools["image"] = {
 				class: ImageTool,
@@ -186,7 +190,7 @@ class Ejs {
 					additionalRequestData: this.addRequestData,
 				}
 			};
-		}
+		} */
 		return ejs_tools;
 	} // end tools
 
