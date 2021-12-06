@@ -13,10 +13,7 @@ module.exports = {
   },
   entry: {
     ejs: [
-      './src/js/ejs.js'
-    ],
-    render: [
-      './src/css/render.css'
+      './src/js/init.js'
     ]
   },
   module: {
@@ -66,7 +63,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: '[name].bundle.js',
+    filename: 'init.bundle.js',
     library: 'Ejs',
     libraryTarget: 'umd'
   },

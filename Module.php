@@ -91,7 +91,7 @@ class Module extends \yii\base\Module
      * @param array $options опции для html контейнера
      * @return void
      */
-    public function editorjs($id, $form = false, $name = false, $jsonContent = '', $options = [])
+    public function editorjs($id, $form = false, $name = false, $jsonContent = '', $placeholder = '', $options = [])
     {
         $view = Yii::$app->view;
 		if ($this->useCDN) {
@@ -140,6 +140,9 @@ class Module extends \yii\base\Module
         }
         if ($jsonContent) {
             $js .= ', ' . Json::htmlEncode($jsonContent);
+        }
+        if ($placeholder) {
+            $js .= ', "' . $placeholder . '"';
         }
         $js .= ');';
         $js .= '})();';

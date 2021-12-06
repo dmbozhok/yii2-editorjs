@@ -1,6 +1,6 @@
-const EditorJS = require('@editorjs/editorjs');
-const List = require('@editorjs/list');
-const Paragraph = require('@editorjs/paragraph');
+//const EditorJS = require('@editorjs/editorjs');
+//const List = require('@editorjs/list');
+//const Paragraph = require('@editorjs/paragraph');
 
 class Ejs {
 	constructor(id, uploadFile, uploadUrl, uploadLink, form, name, content, placeholder = '') {

@@ -12,6 +12,7 @@
   "main": "./dist/js/bundle.js",
   "scripts": {
     "build": "webpack --mode production",
+    "build-init": "webpack --mode production --config webpack.config2.js",
     "dev": "webpack --mode development",
     "build:dev": "webpack --mode development --watch"
   },
