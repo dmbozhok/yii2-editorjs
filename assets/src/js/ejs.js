@@ -49,6 +49,7 @@ class Ejs {
 					tools: this.tools,
 					placeholder: placeholder,
 					inlineToolbar: ['bold', 'italic'],
+					minHeight : 60,
 					onChange: () => {
 						if (formFields) {
 							this.editor.save().then(
